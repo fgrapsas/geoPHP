@@ -61,4 +61,15 @@ class MultiPolygon extends MultiSurface {
         }
         return new MultiLineString($rings);
     }
+
+    public function pointInPolygon($point)
+    {
+        $polygons = $this->getComponents();
+        foreach ($polygons as $polygon) {
+            if ($polygon->pointInPolygon($point)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
